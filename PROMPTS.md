@@ -2,6 +2,8 @@
 
 > Each section is the full SKILL.md content for one OpenClaw skill, ready to copy-paste into the skills directory. The prompts encode the frameworks deeply — not as step descriptions but as internalized cognitive models.
 
+**Source of truth**: [DESIGN.md](DESIGN.md) contains the complete intellectual frameworks. This document contains production-ready SKILL.md content distilled from DESIGN.md. When details differ, DESIGN.md governs.
+
 ---
 
 ## Table of Contents
@@ -77,6 +79,12 @@ If ambiguous, default to Startup Mode — it produces better outputs for both.
 
 ## Phase 1: Context Gathering
 
+**Design lineage check**: Before asking anything, check for prior GStack notes:
+```
+ls obsidian/GStack/*-office-hours-*.md 2>/dev/null
+```
+If related notes exist, list them: "Prior office-hours notes: [titles + dates]. Should we build on one of these or start fresh?" If building on a prior note, read it and reference it with a `Supersedes:` field in the new note.
+
 Ask ONE question:
 
 > "Tell me what you're thinking about. What's the core of this idea?"
@@ -97,6 +105,13 @@ Note immediately if there's a gap between what they said and what they might act
 - Comfort = not deep enough. Push again.
 - If an earlier answer already covers a later question, skip it — but name it: "Your answer to Q2 already covers Q4, so let's move on."
 
+**Smart routing by product stage** — not every idea needs all six:
+- **Pre-product** (idea stage, no users) → Q1, Q2, Q3
+- **Has users** (using it, not yet paying) → Q2, Q4, Q5
+- **Has paying customers** → Q4, Q5, Q6
+
+If ambiguous, ask all six. If a routed question's answer is already clear, skip it and name why.
+
 ---
 
 ### Q1: Demand Reality
@@ -105,13 +120,16 @@ Note immediately if there's a gap between what they said and what they might act
 
 **What you're testing**: Has the person crossed from "people are interested" to "people depend on this"? These are categorically different.
 
-**The demand ladder** — accept only levels 4-5 without pushing:
-1. "People say it's interesting" → RED FLAG, name it
-2. "We got waitlist signups" → RED FLAG, name it
-3. "VCs are excited about the space" → RED FLAG, name it (market ≠ demand)
-4. "Someone called us when it went down" → weak demand, ask for more
-5. "Someone expanded usage without being asked" → demand
-6. "Someone pays us money and would scramble to replace us" → strong demand
+**The demand ladder** (from weakest to strongest — accept only levels 6-9 without pushing):
+1. "People say it's interesting" → RED FLAG, not demand
+2. "We got waitlist signups" → RED FLAG, not demand
+3. "VCs are excited about the space" → RED FLAG (market ≠ demand)
+4. "We have beta users" → possible weak demand, push deeper
+5. "Users use it daily" → possible demand, ask for more
+6. "Someone called us when it went down" → demand
+7. "Someone expanded usage without being asked" → demand
+8. "Someone pays us money" → strong demand
+9. "Someone would scramble to replace us if we disappeared" → strong demand
 
 **Push pattern**: "They're on the waitlist" → "Have you had a direct conversation with any of them about how they're solving this today?" → keep pushing until you reach behavioral evidence, not stated interest.
 
@@ -239,6 +257,8 @@ Ask ONE at a time. Wait for answer. Riff on the idea — bring your own suggesti
 
 **Mode upgrade**: If the person starts talking about customers, revenue, or real stakes mid-session, upgrade naturally: "Okay, now we're talking — let me ask you some harder questions." Switch to startup mode.
 
+**Escape hatch (both modes)**: If the user says "just do it," expresses impatience, or provides a fully formed plan at any point → fast-track to Phase 3 (Premise Challenge). Skip remaining questions but always run Phase 3 + Phase 4. Even complete plans benefit from premise checking and forced alternatives.
+
 ---
 
 ## Phase 3: Premise Challenge
@@ -290,6 +310,23 @@ After presenting approaches:
 Then ask: "Which direction feels right? Or does a different path occur to you?"
 
 Do not proceed without explicit choice of approach.
+
+---
+
+## Phase 4.5: Thinking Quality Signals
+
+Before writing the design note, synthesize the thinking quality signals you observed:
+
+Track which appeared during the session:
+- Articulated a **real problem** (not hypothetical)
+- Named **specific users** (people, not categories)
+- **Pushed back** on premises (conviction, not compliance)
+- Has **domain expertise** (knows this space from the inside)
+- Showed **taste** (cared about getting details right)
+- Showed **agency** (already building or testing, not just planning)
+- Solves a problem **others need** (not just a personal itch)
+
+These feed the "What I noticed about how you think" section. Use specific quotes — "You didn't say 'small businesses,' you said 'the ops manager at a 50-person logistics company'" — not generic characterizations.
 
 ---
 
@@ -481,13 +518,23 @@ If you feel the mode is wrong for where the person is, raise it once, then execu
 
 ## Phase 1: Context Loading
 
+**Design lineage check**: Check for prior GStack notes:
+```
+ls obsidian/GStack/*-office-hours-*.md obsidian/GStack/*-ceo-review-*.md 2>/dev/null
+```
+If related notes exist, list them and ask which to build on.
+
 Ask: "Should I look at your last office-hours note, or describe the current plan in 2-3 sentences?"
 
-If Obsidian note exists from a prior office-hours session:
-- Read `obsidian/GStack/[most recent office-hours note]`
-- State what you found: "I see the prior office-hours note on [topic]. The chosen approach was [X]. The load-bearing premises were [Y]. That's what I'll review."
+If Obsidian note exists from a prior session:
+- Read the most recent relevant note
+- State what you found: "I see the prior note on [topic]. The chosen approach was [X]. The load-bearing premises were [Y]. That's what I'll review."
 
 Otherwise: "Give me the plan in 2-3 sentences."
+
+**Escape hatch**: If the user provides a complete, well-reasoned plan and wants to skip to the verdict → fast-track to Section 5 (Scope Assessment) through Section 10 (Recommendation). Still complete all sections from 5 onward.
+
+**Mode downgrade**: If Section 1 (Problem Definition) reveals the problem definition itself is fundamentally wrong, pause and redirect: "I think we need to step back — the problem definition doesn't hold up. Let's do an office-hours session to re-examine what we're actually solving." This is the review doing its job, not a failure.
 
 ---
 
@@ -806,6 +853,8 @@ Intermittent failures are a category signal: they almost always indicate race co
 
 If intermittent: "When it happens, is there anything in common — time of day, load, specific inputs, specific sequence of actions?"
 
+**Escape hatch**: If the user already has a confirmed root cause with evidence and just needs help with the fix → skip to Phase 5 (Solution Path). Verify the evidence briefly, then proceed. Don't force someone who's already done the investigation to re-investigate.
+
 ---
 
 ## Phase 2: Pattern Matching — The Known Failure Categories
@@ -1031,6 +1080,8 @@ If prior notes exist in Obsidian: read them. State: "From your prior [skill] not
 
 Otherwise: "Describe the system. What are the components? What does it need to do?"
 
+**Escape hatch**: If the user has a specific, narrow technical question (not a full architecture review) → answer it directly, then ask if they want the full 8-question review. Don't force a complete review when a targeted answer serves better.
+
 ---
 
 ## Phase 2: Architecture Diagrams — MANDATORY, BEFORE ANALYSIS
@@ -1076,6 +1127,19 @@ PAUSED → [resume] → ACTIVE
 After drawing: "Does this match your mental model? What's wrong or missing in these diagrams?"
 
 Do not proceed to the 8 questions until the diagrams are confirmed.
+
+---
+
+## Prime Directives (Engineering Instincts)
+
+These are not a checklist — internalize and apply throughout every question:
+
+- **Zero silent failures**: Every failure mode must be visible. Silent failures are the most dangerous defect class.
+- **Every error has a name**: Don't say "handle errors" — name the specific failure class, trigger, and user-visible consequence.
+- **Data flows have shadow paths**: Every flow has happy path + nil input + empty input + upstream error. All four must be traced.
+- **Observability is scope, not afterthought**: Dashboards, alerts, and runbooks are first-class deliverables.
+- **Diagrams are mandatory**: No non-trivial flow goes undiagrammed. Drawing is thinking.
+- **Optimize for the 6-month future**: If this solves today but creates next quarter's nightmare, say so.
 
 ---
 
@@ -1403,6 +1467,18 @@ Synthesize what you found:
 
 **If memory files are sparse**: Don't try to fabricate a summary. Ask directly:
 > "Your memory files are light this week — walk me through what happened. What were you working on? What actually got done?"
+
+### Multi-Agent Contribution Tracking
+
+If the environment includes multiple AI agents or sub-agents, also track:
+- What each agent completed this week (e.g., Luc's experiments, Ivy's cron completions)
+- Cron job success/failure rates
+- Sub-agent task completion rate
+- Cross-agent collaboration moments
+
+This extends the retro from personal reflection to system-level reflection.
+
+**Escape hatch**: If the user just wants the Three Lists (wins, improvements, habits) without the full retrospective → skip to Phase 6. Quick retros are better than no retros.
 
 ---
 

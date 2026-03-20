@@ -2,6 +2,8 @@
 
 > This is the source of truth for every framework being ported. Someone reading this should understand the complete intellectual content of each skill well enough to reimplement everything from scratch.
 
+**Relationship to PROMPTS.md**: This document is the source of truth for all intellectual frameworks. PROMPTS.md contains production-ready SKILL.md content distilled from this document. When details differ, DESIGN.md governs. When updating frameworks, update DESIGN.md first, then propagate to PROMPTS.md.
+
 ---
 
 ## How to Read This Document
@@ -12,6 +14,21 @@ Each skill section contains:
 3. **The Edge Cases** — what happens when the framework hits friction
 4. **The Output Structure** — what a complete session produces and why
 5. **The Chain** — how this skill's output feeds the next skill
+
+### Completeness Calibration for Conversational Use
+
+The original GStack provides a compression ratio table for coding tasks. The equivalent for decision-making:
+
+| Thinking task | Solo thinking | AI-assisted | Compression |
+|---|---|---|---|
+| Problem definition & reframing | 2 days | 30 minutes | ~6x |
+| Premise identification & challenge | Half day | 15 minutes | ~20x |
+| Alternative generation | 1 day | 20 minutes | ~30x |
+| Root cause tracing | 1 day | 30 minutes | ~15x |
+| Architecture review (8 questions) | 2 days | 45 minutes | ~4x |
+| Weekly retrospective with data | 3 hours | 20 minutes | ~9x |
+
+This table makes "always go deep" a calibrated judgment, not a slogan. A 30-minute office-hours session that covers all 6 questions is the equivalent of 2 days of solo thinking. There is no reason to shortcut.
 
 ---
 
@@ -43,6 +60,18 @@ The builder questions are calibrated for **excitement maximization** — what ma
 A builder asked startup questions will feel interrogated and defensive. A startup founder asked builder questions will feel unchallenged and uncritical. Mode selection is not a convenience — it's precision tooling.
 
 ### The Six Startup Forcing Questions — Full Diagnostic Logic
+
+#### Smart Routing by Product Stage
+
+Not every idea needs all six questions. The diagnostic purpose of each question maps to a specific product stage:
+
+- **Pre-product** (idea stage, no users yet) → Q1, Q2, Q3 — validate demand exists before anything else
+- **Has users** (people using it, not yet paying) → Q2, Q4, Q5 — understand the status quo gap and observe real behavior
+- **Has paying customers** → Q4, Q5, Q6 — find the wedge, observe usage, validate future-fit
+
+This routing is a recommendation, not a hard gate. If a question's answer is already clear from context, skip it and name it: "Your answer to Q2 already covers Q4, so let's move on." If the situation is ambiguous, default to asking all six — the Completeness Principle applies.
+
+The routing exists because asking a pre-product founder about Future-Fit (Q6) is premature, and asking someone with paying customers about Demand Reality (Q1) is redundant.
 
 #### Q1: Demand Reality
 
@@ -222,6 +251,34 @@ The output is a structured Markdown note in Obsidian. Structure serves a purpose
 
 The note is designed to be readable months later as a record of the thinking at the time.
 
+### Design Lineage & Cross-Session Discovery
+
+When starting a new office-hours session, the skill should check for prior GStack notes on the same topic:
+
+```
+ls obsidian/GStack/*-office-hours-*.md
+```
+
+If related design notes exist, surface them: "Prior designs on related topics: [titles + dates]. Should we build on one of these or start fresh?"
+
+This creates a revision chain — you can trace how an idea evolved across multiple sessions. The new note gets a `Supersedes:` field referencing the prior note if the user chooses to build on it.
+
+Cross-skill discovery also applies: when starting ceo-review, check for prior office-hours notes. When starting eng-review, check for both. The chain is maintained through explicit references, not implicit assumptions.
+
+### Thinking Quality Signals
+
+During the session, track which of these signals appear in the user's responses:
+
+1. **Articulated a real problem** — not hypothetical, describes someone's actual pain
+2. **Named specific users** — people, not categories ("Sarah at Acme" not "enterprises")
+3. **Pushed back on premises** — conviction, not compliance; disagreed with a challenge and had reasons
+4. **Domain expertise** — knows this space from the inside, not from research
+5. **Showed taste** — cared about getting details right, rejected "good enough"
+6. **Showed agency** — already building or testing, not just planning
+7. **Solves a problem others need** — not just a personal itch
+
+These signals feed the "What I noticed about how you think" section of the design note. The observation must use specific quotes from the session — "You didn't say 'small businesses,' you said 'the ops manager at a 50-person logistics company.' That specificity matters." — not generic characterizations like "you showed good product thinking."
+
 ---
 
 ## Skill 2: `ceo-review` — Strategic/Founder Thinking
@@ -319,6 +376,8 @@ These are not a checklist to enumerate — they are thinking instincts to intern
 The review has 10 sections because each one tests a different failure mode that plans commonly exhibit:
 
 1. **Problem Definition**: Is this the right problem, or a symptom? Plans fail because they solve the visible problem, not the actual one.
+
+**Mode downgrade**: If Section 1 reveals that the problem definition itself is fundamentally wrong — not just needs refinement, but the entire framing is off — the right move is to pause the CEO review and redirect to office-hours. Say: "I think we need to step back. The problem definition doesn't hold up — before I can review the plan, we need to re-examine what we're actually solving. Let's do an office-hours session on this." This is not a failure of the CEO review; it's the review doing its job.
 
 2. **The 10-Star Product**: What is the ideal version? Plans fail when they start from "what we can build" instead of "what would be ideal."
 
@@ -448,6 +507,17 @@ Not "is it a good plan" (that's CEO review's job), not "should we do it" (that's
 The key insight from GStack: **diagrams force hidden assumptions into the open**. When you try to draw the architecture, you discover the things you hadn't thought through. The act of drawing is itself an analysis tool. That's why diagrams are mandatory — not because they're a deliverable, but because drawing them is part of the thinking.
 
 ### The 8 Technical Questions — Full Logic
+
+#### Prime Directives (Engineering Instincts)
+
+These are not a checklist — they are engineering instincts that should inform every question and every recommendation throughout the review:
+
+- **Zero silent failures**: Every failure mode must be visible. Silent failures are the most dangerous class of defect.
+- **Every error has a name**: Don't say "handle errors" — name the specific failure class, what triggers it, and what the user sees.
+- **Data flows have shadow paths**: Every data flow has a happy path and three shadow paths: nil input, empty input, upstream error. All four must be traced.
+- **Observability is scope, not afterthought**: Dashboards, alerts, and runbooks are first-class deliverables, not follow-up items.
+- **Diagrams are mandatory**: No non-trivial flow goes undiagrammed. Drawing is thinking.
+- **Optimize for the 6-month future**: If this plan solves today's problem but creates next quarter's nightmare, say so explicitly.
 
 **Q1: Architecture Boundaries**
 
@@ -618,6 +688,17 @@ This serves two purposes:
 
 If memory files are sparse (common), the skill should ask Steve to self-report. The question: "Walk me through the week — what were you working on, and what actually got done?"
 
+### Multi-Agent Contribution Tracking
+
+In environments with multiple AI agents (e.g., OpenClaw with multiple instances or sub-agents), the retro should also track agent-level contributions:
+
+- What did each agent complete this week?
+- Which cron jobs ran successfully vs. failed?
+- Sub-agent task completion rate
+- Cross-agent collaboration moments (e.g., one agent's output fed another's input)
+
+This extends the retro from single-person reflection to system-level reflection — appropriate when the "team" includes AI agents with autonomous task completion.
+
 ### The Three Analysis Layers
 
 **Layer 1: What happened (descriptive)**
@@ -733,3 +814,11 @@ Every skill saves to `obsidian/GStack/YYYY-MM-DD-[skill]-[slug].md`. The chain w
 Every session ends with: DONE / DONE_WITH_CONCERNS / BLOCKED / NEEDS_CONTEXT.
 
 Not ceremony. Forces accountability for completeness.
+
+### 7. Escape Hatch
+
+Every skill must have an escape hatch. If the user says "just do it," expresses impatience, provides a fully formed plan, or explicitly asks to skip ahead — fast-track to the alternatives/solution phase.
+
+The logic: the forcing questions exist to surface gaps in thinking. If the user's thinking is already clear (or they've been through this before), the questions become interrogation rather than diagnosis. An advisor who can't read the room is a bad advisor.
+
+Implementation: if the user provides a complete, specific plan at any point, skip the remaining questions but still run the Premise Challenge and Alternatives phases. Even well-formed plans benefit from premise checking and forced alternatives.
