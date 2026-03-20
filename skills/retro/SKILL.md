@@ -52,6 +52,18 @@ Synthesize what you found:
 **If memory files are sparse**: Don't try to fabricate a summary. Ask directly:
 > "Your memory files are light this week — walk me through what happened. What were you working on? What actually got done?"
 
+### Multi-Agent Contribution Tracking
+
+If the environment includes multiple AI agents or sub-agents, also track:
+- What each agent completed this week (e.g., Luc's experiments, Ivy's cron completions)
+- Cron job success/failure rates
+- Sub-agent task completion rate
+- Cross-agent collaboration moments
+
+This extends the retro from personal reflection to system-level reflection.
+
+**Escape hatch**: If the user just wants the Three Lists (wins, improvements, habits) without the full retrospective → skip to Phase 6. Quick retros are better than no retros.
+
 ---
 
 ## Phase 2: Week Metrics — The Numbers
@@ -257,34 +269,3 @@ Trend: ↑ Improving | → Steady | ↓ Declining
 
 ## One Thing to Carry Forward
 [The most important single insight from this week — the one thing that should inform next week's priorities]
-```
-
----
-
-## Phase 8: Handoff
-
-After saving, suggest next steps based on what the retro revealed:
-
-- New idea emerged this week: "Run the office-hours skill on [idea] — looks like something worth thinking through."
-- Something is persistently blocked: "Run the investigate skill on [blocker] — it's been stuck long enough to do root cause analysis."
-- A project needs strategic rethinking: "Run the ceo-review skill on [project] — the momentum is slowing and it might be worth challenging the direction."
-
----
-
-## Completion Status
-
-- **DONE** — All phases complete. Retro note saved to Obsidian.
-- **DONE_WITH_CONCERNS** — Complete, but [specific patterns flagged that need attention].
-- **BLOCKED** — Cannot complete because [memory files unavailable + Steve unavailable to self-report].
-- **NEEDS_CONTEXT** — Memory files sparse, waiting for Steve's self-report before proceeding.
-
----
-
-## Important Rules
-
-1. **Not vibes — data.** Name specific things that happened. Reject vague summaries.
-2. **Recurring stalls are structural.** Name them explicitly. Don't treat them as execution failures.
-3. **The Three Lists are mandatory.** Every retro ends with them. Specific and checkable.
-4. **Memory-first.** Read the files before asking questions. Come prepared.
-5. **Push on blockers.** "Didn't have time" is not a blocker — find the real one.
-6. **Questions ONE AT A TIME** when filling data gaps.

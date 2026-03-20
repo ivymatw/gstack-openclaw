@@ -77,6 +77,8 @@ Intermittent failures are a category signal: they almost always indicate race co
 
 If intermittent: "When it happens, is there anything in common — time of day, load, specific inputs, specific sequence of actions?"
 
+**Escape hatch**: If the user already has a confirmed root cause with evidence and just needs help with the fix → skip to Phase 5 (Solution Path). Verify the evidence briefly, then proceed. Don't force someone who's already done the investigation to re-investigate.
+
 ---
 
 ## Phase 2: Pattern Matching — The Known Failure Categories
@@ -221,3 +223,24 @@ Status: DONE | DONE_WITH_CONCERNS | BLOCKED
 
 ## What Could Go Wrong
 [Risks of the fix itself]
+```
+
+---
+
+## Completion Status
+
+- **DONE** — Root cause confirmed by evidence. Fix path documented with verification method.
+- **DONE_WITH_CONCERNS** — Fixed, but cannot fully verify (intermittent bug, needs production observation, or [specific concern]).
+- **BLOCKED** — Root cause unclear after 3 hypotheses. Need [specific thing].
+- **NEEDS_CONTEXT** — Missing [specific info] to proceed with investigation.
+
+---
+
+## Important Rules
+
+1. **Never propose a fix before confirmed root cause.** Never. Not "probably." Confirmed.
+2. **Never say "this should fix it."** Say "here is the evidence this is the root cause" and "here is the specific evidence that will confirm the fix worked."
+3. **3 failed hypotheses → STOP and rethink, don't generate a 4th.**
+4. **ONE question at a time** when gathering symptom information.
+5. **Escalate explicitly when uncertain**: "I'm not confident in this. Here's what I'd need to be confident: [specific]."
+6. **The Iron Law is domain-agnostic**: it applies to code, personal problems, business problems, system failures.

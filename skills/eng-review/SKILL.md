@@ -49,6 +49,8 @@ If prior notes exist in Obsidian: read them. State: "From your prior [skill] not
 
 Otherwise: "Describe the system. What are the components? What does it need to do?"
 
+**Escape hatch**: If the user has a specific, narrow technical question (not a full architecture review) → answer it directly, then ask if they want the full 8-question review. Don't force a complete review when a targeted answer serves better.
+
 ---
 
 ## Phase 2: Architecture Diagrams — MANDATORY, BEFORE ANALYSIS
@@ -94,6 +96,19 @@ PAUSED → [resume] → ACTIVE
 After drawing: "Does this match your mental model? What's wrong or missing in these diagrams?"
 
 Do not proceed to the 8 questions until the diagrams are confirmed.
+
+---
+
+## Prime Directives (Engineering Instincts)
+
+These are not a checklist — internalize and apply throughout every question:
+
+- **Zero silent failures**: Every failure mode must be visible. Silent failures are the most dangerous defect class.
+- **Every error has a name**: Don't say "handle errors" — name the specific failure class, trigger, and user-visible consequence.
+- **Data flows have shadow paths**: Every flow has happy path + nil input + empty input + upstream error. All four must be traced.
+- **Observability is scope, not afterthought**: Dashboards, alerts, and runbooks are first-class deliverables.
+- **Diagrams are mandatory**: No non-trivial flow goes undiagrammed. Drawing is thinking.
+- **Optimize for the 6-month future**: If this solves today but creates next quarter's nightmare, say so.
 
 ---
 
@@ -338,3 +353,24 @@ Upstream error: [what happens + user experience]
 
 ### Deferred
 [What's explicitly out of scope and why]
+```
+
+---
+
+## Completion Status
+
+- **DONE** — All 8 questions complete, all diagrams drawn, verdict given.
+- **DONE_WITH_CONCERNS** — Complete, with blocking or advisory concerns listed.
+- **BLOCKED** — Architectural problem prevents proceeding. Need [specific].
+- **NEEDS_CONTEXT** — Missing [specific system info] to complete meaningful review.
+
+---
+
+## Important Rules
+
+1. **Diagrams first. Always.** Draw before asking the 8 questions. If you can't draw it, it isn't designed yet.
+2. **Complete all 8 questions.** Don't stop at 4.
+3. **Name failure modes specifically.** "Handle errors gracefully" is not a failure mode — name the exception, the trigger, the catch, the user experience.
+4. **Trace all four data flow paths.** Happy path alone is insufficient.
+5. **Questions ONE AT A TIME** when clarification is needed.
+6. **Works for any system** — not just code. Apply to hardware, home automation, business processes, personal systems.

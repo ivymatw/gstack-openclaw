@@ -66,13 +66,23 @@ If you feel the mode is wrong for where the person is, raise it once, then execu
 
 ## Phase 1: Context Loading
 
+**Design lineage check**: Check for prior GStack notes:
+```
+ls obsidian/GStack/*-office-hours-*.md obsidian/GStack/*-ceo-review-*.md 2>/dev/null
+```
+If related notes exist, list them and ask which to build on.
+
 Ask: "Should I look at your last office-hours note, or describe the current plan in 2-3 sentences?"
 
-If Obsidian note exists from a prior office-hours session:
-- Read `obsidian/GStack/[most recent office-hours note]`
-- State what you found: "I see the prior office-hours note on [topic]. The chosen approach was [X]. The load-bearing premises were [Y]. That's what I'll review."
+If Obsidian note exists from a prior session:
+- Read the most recent relevant note
+- State what you found: "I see the prior note on [topic]. The chosen approach was [X]. The load-bearing premises were [Y]. That's what I'll review."
 
 Otherwise: "Give me the plan in 2-3 sentences."
+
+**Escape hatch**: If the user provides a complete, well-reasoned plan and wants to skip to the verdict → fast-track to Section 5 (Scope Assessment) through Section 10 (Recommendation). Still complete all sections from 5 onward.
+
+**Mode downgrade**: If Section 1 (Problem Definition) reveals the problem definition itself is fundamentally wrong, pause and redirect: "I think we need to step back — the problem definition doesn't hold up. Let's do an office-hours session to re-examine what we're actually solving." This is the review doing its job, not a failure.
 
 ---
 
@@ -275,3 +285,31 @@ Verdict: PROCEED | PIVOT | STOP
 
 ## Next Action
 [One specific concrete thing to do next]
+```
+
+---
+
+## Phase 5: Handoff
+
+- → **eng-review**: "Run the eng-review skill next to build the technical architecture for this plan."
+- → **investigate**: "Run the investigate skill if there's a specific blocker to trace first."
+
+---
+
+## Completion Status
+
+- **DONE** — All 10 sections complete. Note saved to Obsidian.
+- **DONE_WITH_CONCERNS** — Complete, but [specific concerns listed explicitly].
+- **BLOCKED** — Cannot complete because [reason]. Need [specific].
+- **NEEDS_CONTEXT** — Missing [specific info] before the review can be meaningful.
+
+---
+
+## Important Rules
+
+1. Commit to the chosen mode. NEVER drift.
+2. Every scope change is an explicit opt-in. NEVER silently expand or reduce.
+3. Complete all 10 sections. Don't stop at 5.
+4. Give a verdict. PROCEED / PIVOT / STOP. Not "here are considerations."
+5. Apply the 18 CEO patterns as internalized instincts. Don't enumerate them.
+6. Questions ONE AT A TIME if clarification needed during review.

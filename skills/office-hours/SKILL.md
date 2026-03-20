@@ -57,6 +57,12 @@ If ambiguous, default to Startup Mode — it produces better outputs for both.
 
 ## Phase 1: Context Gathering
 
+**Design lineage check**: Before asking anything, check for prior GStack notes:
+```
+ls obsidian/GStack/*-office-hours-*.md 2>/dev/null
+```
+If related notes exist, list them: "Prior office-hours notes: [titles + dates]. Should we build on one of these or start fresh?" If building on a prior note, read it and reference it with a `Supersedes:` field in the new note.
+
 Ask ONE question:
 
 > "Tell me what you're thinking about. What's the core of this idea?"
@@ -77,6 +83,13 @@ Note immediately if there's a gap between what they said and what they might act
 - Comfort = not deep enough. Push again.
 - If an earlier answer already covers a later question, skip it — but name it: "Your answer to Q2 already covers Q4, so let's move on."
 
+**Smart routing by product stage** — not every idea needs all six:
+- **Pre-product** (idea stage, no users) → Q1, Q2, Q3
+- **Has users** (using it, not yet paying) → Q2, Q4, Q5
+- **Has paying customers** → Q4, Q5, Q6
+
+If ambiguous, ask all six. If a routed question's answer is already clear, skip it and name why.
+
 ---
 
 ### Q1: Demand Reality
@@ -85,13 +98,16 @@ Note immediately if there's a gap between what they said and what they might act
 
 **What you're testing**: Has the person crossed from "people are interested" to "people depend on this"? These are categorically different.
 
-**The demand ladder** — accept only levels 4-5 without pushing:
-1. "People say it's interesting" → RED FLAG, name it
-2. "We got waitlist signups" → RED FLAG, name it
-3. "VCs are excited about the space" → RED FLAG, name it (market ≠ demand)
-4. "Someone called us when it went down" → weak demand, ask for more
-5. "Someone expanded usage without being asked" → demand
-6. "Someone pays us money and would scramble to replace us" → strong demand
+**The demand ladder** (from weakest to strongest — accept only levels 6-9 without pushing):
+1. "People say it's interesting" → RED FLAG, not demand
+2. "We got waitlist signups" → RED FLAG, not demand
+3. "VCs are excited about the space" → RED FLAG (market ≠ demand)
+4. "We have beta users" → possible weak demand, push deeper
+5. "Users use it daily" → possible demand, ask for more
+6. "Someone called us when it went down" → demand
+7. "Someone expanded usage without being asked" → demand
+8. "Someone pays us money" → strong demand
+9. "Someone would scramble to replace us if we disappeared" → strong demand
 
 **Push pattern**: "They're on the waitlist" → "Have you had a direct conversation with any of them about how they're solving this today?" → keep pushing until you reach behavioral evidence, not stated interest.
 
@@ -219,6 +235,8 @@ Ask ONE at a time. Wait for answer. Riff on the idea — bring your own suggesti
 
 **Mode upgrade**: If the person starts talking about customers, revenue, or real stakes mid-session, upgrade naturally: "Okay, now we're talking — let me ask you some harder questions." Switch to startup mode.
 
+**Escape hatch (both modes)**: If the user says "just do it," expresses impatience, or provides a fully formed plan at any point → fast-track to Phase 3 (Premise Challenge). Skip remaining questions but always run Phase 3 + Phase 4. Even complete plans benefit from premise checking and forced alternatives.
+
 ---
 
 ## Phase 3: Premise Challenge
@@ -270,6 +288,23 @@ After presenting approaches:
 Then ask: "Which direction feels right? Or does a different path occur to you?"
 
 Do not proceed without explicit choice of approach.
+
+---
+
+## Phase 4.5: Thinking Quality Signals
+
+Before writing the design note, synthesize the thinking quality signals you observed:
+
+Track which appeared during the session:
+- Articulated a **real problem** (not hypothetical)
+- Named **specific users** (people, not categories)
+- **Pushed back** on premises (conviction, not compliance)
+- Has **domain expertise** (knows this space from the inside)
+- Showed **taste** (cared about getting details right)
+- Showed **agency** (already building or testing, not just planning)
+- Solves a problem **others need** (not just a personal itch)
+
+These feed the "What I noticed about how you think" section. Use specific quotes — "You didn't say 'small businesses,' you said 'the ops manager at a 50-person logistics company'" — not generic characterizations.
 
 ---
 
@@ -351,3 +386,36 @@ Approach [X] because [one reason].
 ## What I noticed about how you think
 - [Specific observation — quote their actual words, don't characterize them]
 - [Specific observation]
+```
+
+---
+
+## Phase 7: Handoff
+
+After saving, state the next step clearly and specifically:
+
+- **Ambitious / uncertain scope → ceo-review**: "Run the ceo-review skill next. It will challenge the scope and find the 10-star version."
+- **Well-scoped, needs technical plan → eng-review**: "Run the eng-review skill next. It will lock in architecture, failure modes, and tests."
+- **Something blocking you → investigate**: "Run the investigate skill. It will trace the root cause of what's blocking you."
+
+---
+
+## Completion Status
+
+End every session with exactly one of:
+- **DONE** — All questions answered, premises challenged, alternatives generated, note saved to Obsidian.
+- **DONE_WITH_CONCERNS** — Complete, but [list specific concerns — unanswered questions, weak demand evidence, etc.].
+- **BLOCKED** — Cannot complete because [reason]. Need: [specific thing].
+- **NEEDS_CONTEXT** — Missing [specific info] to complete. [What specific info is needed].
+
+---
+
+## Important Rules
+
+1. **NEVER start implementation.** Design note only.
+2. **Questions ONE AT A TIME.** Never batch two in one message.
+3. **Push on vague answers.** "That's a red flag — can you be more specific?" Name red flags directly.
+4. **The assignment is mandatory.** Every session ends with one concrete action.
+5. **Alternatives are mandatory.** Never skip Phase 4.
+6. **Mode selection matters.** Don't interrogate builders; don't let startups off easy.
+7. **Quote them back.** The "What I noticed" section must use their actual words.
